@@ -1,0 +1,22 @@
+# Virtual Environments (The heavy stuff)
+.venv/
+venv/
+env/
+bin/
+lib/
+share/
+pyvenv.cfg
+
+# Environment Variables (The secret stuff)
+.env
+
+# Python caching
+__pycache__/
+*.pyc
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Miscellaneous
+Screenshot*/
