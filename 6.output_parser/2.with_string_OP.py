@@ -1,12 +1,12 @@
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 from dotenv import load_dotenv  
 from langchain_core.prompts import PromptTemplate
-from langchain_core.output_parsers import StringOutputParser
+from langchain_core.output_parsers import StrOutputParser
 
 load_dotenv()
 
 llm = HuggingFaceEndpoint(
-    repo_id="meta-llama/Meta-Llama-3-8B-Instruct",
+    repo_id="google/gemma-2-2b-it",
     task="text-generation", 
     )
 
@@ -29,7 +29,7 @@ template2 = PromptTemplate(
 # here you can see how we can use the StringOutputParser to parse the output of the model and pass it to the next prompt in the chain
 # this where output parser "string" comes in handy, it will parse the output of the model and pass it to the next prompt in the chain
 
-parser = StringOutputParser()
+parser = StrOutputParser()
 
 chain = template1 | model | parser | template2 | model | parser
 
