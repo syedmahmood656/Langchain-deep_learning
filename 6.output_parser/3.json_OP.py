@@ -44,3 +44,5 @@ print(type(fianl_result)) # this will show the type of the final result, which s
 
   print(result) # this will show the final result, which should be a dictionary with the name, city, and age of the frictional character
   """
+
+## a flaw in json parser is that the parser cannot responde in a particular foramt\schema 
