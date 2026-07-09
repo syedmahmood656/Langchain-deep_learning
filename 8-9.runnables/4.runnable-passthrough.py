@@ -2,7 +2,7 @@ from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 from dotenv import load_dotenv
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import PromptTemplate
-from langchain_core.runnables import RunnableSequence
+from langchain_core.runnables import RunnableSequence, RunnableParallel, RunnablePassthrough
 
 load_dotenv()
 
@@ -26,9 +26,17 @@ prompt2 = PromptTemplate(
     input_variables=["joke"],
 )
 
-chain = RunnableSequence(prompt1, model, parser, prompt2, model, parser)
 
-result = chain.invoke({"topic": "AI"}) 
+
+joke_Chain = RunnableSequence(prompt1, model, parser)
+
+parallel_Chain = RunnableParallel({
+    'joke': RunnablePassthrough(joke_Chain),
+    'explain': RunnableSequence(prompt2, model, parser)
+})
+
+final_Chain = RunnableSequence(joke_Chain, parallel_Chain)
+
+result = final_Chain.invoke({"topic": "AI"})
 
 print(result)
-
